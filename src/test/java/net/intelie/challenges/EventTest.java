@@ -1,5 +1,6 @@
 package net.intelie.challenges;
 
+import net.intelie.challenges.entity.Event;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
