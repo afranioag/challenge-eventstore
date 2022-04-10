@@ -1,8 +1,11 @@
 package net.intelie.challenges;
 
-public class ChallengeEventStoresApplication {
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
+public class ChallengeEventStoresApplication {
     public static void main(String[] args){
-        System.out.println("OIIII");
+        SpringApplication.run(ChallengeEventStoresApplication.class, args);
     }
 }
