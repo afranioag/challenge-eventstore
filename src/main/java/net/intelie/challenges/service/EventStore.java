@@ -4,6 +4,9 @@ import net.intelie.challenges.entity.Event;
 import net.intelie.challenges.util.EventIterator;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * An abstraction of an event store.
  * <p>
@@ -37,7 +40,7 @@ public interface EventStore {
      * {@param type} and timestamp between {@param startTime}
      * (inclusive) and {@param endTime} (exclusive).
      */
-    EventIterator query(String type, long startTime, long endTime);
+    List<Event> query(String type, long startTime, long endTime);
 
     Event get(Long id);
 }

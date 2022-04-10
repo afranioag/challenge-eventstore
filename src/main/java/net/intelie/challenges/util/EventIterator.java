@@ -5,7 +5,7 @@ import net.intelie.challenges.entity.Event;
 /**
  * An iterator over an event collection.
  */
-public interface EventIterator extends AutoCloseable {
+public interface EventIterator<Event> extends AutoCloseable {
     /**
      * Move the iterator to the next event, if any.
      *

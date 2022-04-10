@@ -5,7 +5,11 @@ import net.intelie.challenges.repository.EventRepository;
 import net.intelie.challenges.util.EventIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,13 +29,22 @@ public class EventStoreImpl implements EventStore{
     }
 
     @Override
+    @Transactional
     public void removeAll(String type) {
         eventRepository.deleteAllByType(type);
     }
 
     @Override
-    public EventIterator query(String type, long startTime, long endTime) {
-        return null;
+    public List<Event> query(String type, long startTime, long endTime) {
+        List<Event> events = eventRepository.findAllByType(type);
+
+        events.forEach(event -> {
+            if(event.getTimestamp() < startTime || event.getTimestamp() > endTime){
+                events.remove(event);
+            }
+        });
+
+        return events;
     }
 
     @Override
