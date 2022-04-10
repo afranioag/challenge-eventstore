@@ -2,6 +2,7 @@ package net.intelie.challenges.service;
 
 import net.intelie.challenges.entity.Event;
 import net.intelie.challenges.util.EventIterator;
+import org.springframework.http.ResponseEntity;
 
 /**
  * An abstraction of an event store.
@@ -37,4 +38,6 @@ public interface EventStore {
      * (inclusive) and {@param endTime} (exclusive).
      */
     EventIterator query(String type, long startTime, long endTime);
+
+    Event get(Long id);
 }

@@ -6,6 +6,8 @@ import net.intelie.challenges.util.EventIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class EventStoreImpl implements EventStore{
 
@@ -18,7 +20,8 @@ public class EventStoreImpl implements EventStore{
             throw new RuntimeException("Event not null");
         }
 
-        eventRepository.save(event);
+        Event event1 = new Event(event.getType(), event.getTimestamp());
+        eventRepository.save(event1);
     }
 
     @Override
@@ -29,5 +32,15 @@ public class EventStoreImpl implements EventStore{
     @Override
     public EventIterator query(String type, long startTime, long endTime) {
         return null;
+    }
+
+    @Override
+    public Event get(Long id) {
+        Optional<Event> eventOptional = eventRepository.findById(id);
+        if(!eventOptional.isPresent()){
+            throw new RuntimeException("Event not found");
+        }
+
+        return eventOptional.get();
     }
 }
